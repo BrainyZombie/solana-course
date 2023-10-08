@@ -48,10 +48,12 @@ Every interaction with the Solana network using `@solana/web3.js` is going to ha
 
 For now we'll use the `Devnet` cluster rather than `Mainnet`. As the name suggests, the `Devnet` cluster is designed for developer use and testing.
 
+We also make sure to specify that each interaction must be `Confirmed` by the cluster before we proceed further.
+
 ```typescript
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 
-const connection = new Connection(clusterApiUrl("devnet"));
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 console.log(`✅ Connected!`)
 ```
 
@@ -68,7 +70,7 @@ To read the balance of an account:
 ```typescript
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 
-const connection = new Connection(clusterApiUrl("devnet"));
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 const address = new PublicKey('CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN');
 const balance = await connection.getBalance(address);
 
@@ -81,7 +83,7 @@ The balance returned is in *lamports*. A lamport is the minor unit for Sol, like
 ```typescript
 import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-const connection = new Connection(clusterApiUrl("devnet"));
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 const address = new PublicKey('CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN');
 const balance = await connection.getBalance(address);
 const balanceInSol = balance / LAMPORTS_PER_SOL;
